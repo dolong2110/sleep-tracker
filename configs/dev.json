@@ -1,0 +1,22 @@
+{
+  "URLS": {
+    "API_URL": "api/",
+    "USER_URL": "user/",
+    "ADMIN_URL": "admin/"
+  },
+  "HOST": "localhost",
+  "PORT": "8000",
+  "MAX_BODY_BYTES": "4194304",
+  "TIMEOUT": "5",
+  "DATA_SOURCES": {
+    "POSTGRE_SQL": {
+      "HOST": "localhost",
+      "PORT": "5432",
+      "USER": "postgres",
+      "PASSWORD": "password",
+      "DB": "postgres",
+      "SSL": "disable",
+      "TIMEOUT": "10"
+    }
+  }
+}

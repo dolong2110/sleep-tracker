@@ -1,0 +1,37 @@
+version: "3.9"
+
+services:
+  postgres-server:
+    image: "postgres:alpine"
+    container_name: postgres
+    environment:
+      - POSTGRES_PASSWORD=password
+    restart: always
+    ports:
+      - "5432:5432"
+    volumes:
+      - "pgdata_server:/var/lib/postgresql/data"
+    command: ["postgres", "-c", "log_statement=all"]
+  server:
+    image: server
+    container_name: server
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: builder
+    env_file: ./configs/dev.json
+    expose:
+      - "8000"
+    ports:
+      - "8000:8000"
+    environment:
+      - ENV=dev
+    volumes:
+      - .:/go/src/app
+    depends_on:
+      - postgres-server
+    command: reflex -r "\.go$$" -s -- sh -c "go run ./cmd/."
+
+volumes:
+  pgdata_server:

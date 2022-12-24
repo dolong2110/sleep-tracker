@@ -1,0 +1,55 @@
+package handler
+
+import (
+	"context"
+	"fmt"
+	"github.com/gin-gonic/gin"
+	"github.com/go-playground/validator/v10"
+	"github.com/pkg/errors"
+	"mindx/internal/utils"
+	"mindx/pkg/errs"
+	"mindx/pkg/httpx"
+	"mindx/pkg/zapx"
+)
+
+// binData parse JSON body from requests
+func bindData(c *gin.Context, req interface{}) bool {
+	var (
+		errResp *errs.Error
+		err     error
+	)
+
+	if c.ContentType() != "application/json" {
+		msg := fmt.Sprintf("%s only accepts Content - Template application/json.", c.FullPath())
+		zapx.Error(context.TODO(), msg, errors.Errorf("Not application/json content type."))
+		errResp = errs.NewUnsupportedMediaType(msg)
+		c.JSON(errResp.Code, httpx.ApiJson{
+			Error: []error{errResp},
+		})
+		return false
+	}
+
+	if err = c.ShouldBind(req); err != nil {
+		zapx.Error(c, "error binding request data.", err)
+		if _, ok := err.(validator.ValidationErrors); ok {
+			invalidArgs := utils.GetInvalidArgs(err)
+
+			zapx.Error(context.TODO(), "failed to parse the json data.", err)
+			errResp = errs.NewBadRequest("invalid request parameters. See invalidArgs.")
+			errResp.InvalidArgs = invalidArgs
+			c.JSON(errResp.Code, httpx.ApiJson{
+				Error: []error{errResp},
+			})
+			return false
+		}
+
+		zapx.Error(context.TODO(), "failed to parse the json data.", err)
+		errResp = errs.NewInternal()
+		c.JSON(errResp.Code, httpx.ApiJson{
+			Error: []error{errResp},
+		})
+		return false
+	}
+
+	return true
+}
