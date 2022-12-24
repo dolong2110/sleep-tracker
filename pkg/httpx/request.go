@@ -8,9 +8,9 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
-	"mindx/pkg/zapx"
 	"net"
 	"net/http"
+	"sleep-tracker/pkg/zapx"
 )
 
 type ExternalHttpRequestResponse struct {

@@ -2,12 +2,12 @@ package handler
 
 import (
 	"github.com/gin-gonic/gin"
-	"mindx/internal/consts"
-	"mindx/internal/models"
-	"mindx/pkg/errs"
-	"mindx/pkg/httpx"
-	"mindx/pkg/zapx"
 	"net/http"
+	"sleep-tracker/internal/consts"
+	"sleep-tracker/internal/models"
+	"sleep-tracker/pkg/errs"
+	"sleep-tracker/pkg/httpx"
+	"sleep-tracker/pkg/zapx"
 )
 
 type AdminHandler struct {

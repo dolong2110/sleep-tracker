@@ -3,10 +3,10 @@ package service
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"mindx/internal/models"
-	"mindx/internal/utils"
-	"mindx/pkg/errs"
-	"mindx/pkg/zapx"
+	"sleep-tracker/internal/models"
+	"sleep-tracker/internal/utils"
+	"sleep-tracker/pkg/errs"
+	"sleep-tracker/pkg/zapx"
 )
 
 type UserService struct {

@@ -3,7 +3,7 @@ package errs
 import (
 	"errors"
 	"fmt"
-	"mindx/pkg/internal/stacks"
+	"sleep-tracker/pkg/internal/stacks"
 )
 
 type Debugger interface {

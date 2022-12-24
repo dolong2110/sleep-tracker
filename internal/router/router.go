@@ -2,11 +2,11 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
-	"mindx/external"
-	"mindx/internal/handler"
-	"mindx/internal/middleware"
-	"mindx/internal/repository"
-	"mindx/internal/service"
+	"sleep-tracker/external"
+	"sleep-tracker/internal/handler"
+	"sleep-tracker/internal/middleware"
+	"sleep-tracker/internal/repository"
+	"sleep-tracker/internal/service"
 )
 
 type Router struct {
@@ -57,7 +57,7 @@ func (r *Router) Init() (engine *gin.Engine, err error) {
 	ug := routerGroup.Group(r.Configs.URLS.UserURL)
 	ug.POST("signup", userHandler.Signup)
 	ug.POST("signin", userHandler.Signin)
-	ug.POST("sleep", userHandler.MakeSleep)
+	ug.POST("sleep", userHandler.CreateSleep)
 	ug.DELETE("sleep", userHandler.DeleteSleep)
 	ug.PATCH("sleep", userHandler.UpdateSleep)
 

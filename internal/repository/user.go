@@ -7,9 +7,9 @@ import (
 	"github.com/jackc/pgerrcode"
 	"go.uber.org/zap"
 	"gorm.io/gorm"
-	"mindx/internal/models"
-	"mindx/pkg/errs"
-	"mindx/pkg/zapx"
+	"sleep-tracker/internal/models"
+	"sleep-tracker/pkg/errs"
+	"sleep-tracker/pkg/zapx"
 )
 
 type UserRepository struct {

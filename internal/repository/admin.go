@@ -2,7 +2,7 @@ package repository
 
 import (
 	"gorm.io/gorm"
-	"mindx/internal/models"
+	"sleep-tracker/internal/models"
 )
 
 type AdminRepository struct {

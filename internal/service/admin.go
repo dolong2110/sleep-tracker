@@ -1,6 +1,6 @@
 package service
 
-import "mindx/internal/models"
+import "sleep-tracker/internal/models"
 
 type AdminService struct {
 	AdminRepository models.AdminRepositorier

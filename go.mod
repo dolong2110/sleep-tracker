@@ -1,11 +1,11 @@
-module mindx
+module sleep-tracker
 
 go 1.20
 
 require (
 	github.com/gin-gonic/gin v1.8.2
 	github.com/go-playground/validator/v10 v10.11.1
-	github.com/google/uuid v1.1.2
+	github.com/google/uuid v1.3.0
 	github.com/jackc/pgconn v1.13.0
 	github.com/jackc/pgerrcode v0.0.0-20220416144525-469b46aa5efa
 	github.com/pkg/errors v0.9.1
@@ -13,7 +13,7 @@ require (
 	github.com/stretchr/testify v1.8.1
 	go.elastic.co/apm/module/apmzap v1.15.0
 	go.uber.org/zap v1.24.0
-	golang.org/x/crypto v0.0.0-20220722155217-630584e8d5aa
+	golang.org/x/crypto v0.4.0
 	gorm.io/driver/postgres v1.4.5
 	gorm.io/gorm v1.24.2
 )

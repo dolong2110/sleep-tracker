@@ -1,10 +1,9 @@
 package service
 
 import (
-	"fmt"
 	"github.com/gin-gonic/gin"
-	"mindx/internal/models"
-	"mindx/pkg/zapx"
+	"sleep-tracker/internal/models"
+	"sleep-tracker/pkg/zapx"
 )
 
 type SleepService struct {
@@ -45,12 +44,6 @@ func (s *SleepService) Create(c *gin.Context, sleep *models.Sleep) error {
 func (s *SleepService) Delete(c *gin.Context, sleep *models.Sleep) error {
 	var err error
 
-	fmt.Print(sleep)
-	if err = s.SleepRepository.FindByID(c, sleep); err != nil {
-		zapx.Error(c, "failed to get sleep", err)
-		return err
-	}
-
 	if err = s.SleepRepository.Delete(c, sleep); err != nil {
 		zapx.Error(c, "failed to delete sleep", err)
 		return err
@@ -66,11 +59,6 @@ func (s *SleepService) Update(c *gin.Context, sleep *models.Sleep) error {
 		ID:     sleep.ID,
 		UserID: sleep.UserID,
 		Date:   sleep.Date,
-	}
-
-	if err = s.SleepRepository.FindByConditions(c, sleepFetched); err != nil {
-		zapx.Error(c, "failed to get sleep", err)
-		return err
 	}
 
 	if !sleep.SleepTime.IsZero() {

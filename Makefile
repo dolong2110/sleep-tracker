@@ -1,7 +1,7 @@
 .PHONY: migrate-create migrate-up migrate-down migrate-force init
 
 PWD = $(shell pwd)
-MPATH = $(PWD)/mindx/internal/migrations
+MPATH = $(PWD)/sleep-tracker/internal/migrations
 PORT = 5432
 
 # Default number of migrations to execute up or down

@@ -24,3 +24,42 @@ func FromUnixMillisecond(milli int64) time.Time {
 	nano := (milli % milliToSecDivisor) * nanoToMilliDivisor
 	return time.Unix(sec, nano)
 }
+
+func GetTimeString(t time.Time) string {
+	return t.Format("2006-01-02T15:04:05")
+}
+
+func GetDateString(t time.Time) string {
+	return t.Format("2006-1-2")
+}
+
+func GetDayTimeString(t time.Time) string {
+	return t.Format("15:04:05")
+}
+
+func GetTimeFromString(timeString string) (time.Time, error) {
+	t, err := time.Parse("2006-01-02T15:04:05", timeString)
+	if err != nil {
+		return time.Time{}, err
+	}
+
+	return t, nil
+}
+
+func GetDateFromString(timeString string) (time.Time, error) {
+	t, err := time.Parse("2006-1-2", timeString)
+	if err != nil {
+		return time.Time{}, err
+	}
+
+	return t, nil
+}
+
+func GetDayTimeFromString(timeString string) (time.Time, error) {
+	t, err := time.Parse("15:04:05", timeString)
+	if err != nil {
+		return time.Time{}, err
+	}
+
+	return t, nil
+}

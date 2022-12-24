@@ -4,12 +4,12 @@ import (
 	"context"
 	"fmt"
 	"log"
-	"mindx/external"
-	"mindx/internal/router"
-	"mindx/pkg/zapx"
 	"net/http"
 	"os"
 	"os/signal"
+	"sleep-tracker/external"
+	"sleep-tracker/internal/router"
+	"sleep-tracker/pkg/zapx"
 	"time"
 )
 

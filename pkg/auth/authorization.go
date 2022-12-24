@@ -7,9 +7,9 @@ package auth
 
 import (
 	"github.com/gin-gonic/gin"
-	"mindx/pkg/errs"
-	"mindx/pkg/httpx"
 	"net/http"
+	"sleep-tracker/pkg/errs"
+	"sleep-tracker/pkg/httpx"
 	"strings"
 )
 
@@ -96,7 +96,7 @@ func Authorize(c checker) gin.HandlerFunc {
 		if ok := c.IsSatisfied(perms); !ok {
 			err := errs.NewBadRequest("failed to get the permissions for the the service")
 			ctx.AbortWithStatusJSON(http.StatusBadRequest, httpx.ApiJson{
-				Error: []*errs.Error{err},
+				Error: []error{err},
 			})
 			return
 		}

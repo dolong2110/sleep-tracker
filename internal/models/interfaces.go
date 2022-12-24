@@ -35,8 +35,6 @@ type SleepServicer interface {
 
 type SleepRepositorier interface {
 	Create(c *gin.Context, sleep *Sleep) error
-	FindByConditions(c *gin.Context, user *Sleep) error
-	FindByID(c *gin.Context, sleep *Sleep) error
 	Delete(c *gin.Context, sleep *Sleep) error
 	Update(c *gin.Context, sleep *Sleep) error
 }

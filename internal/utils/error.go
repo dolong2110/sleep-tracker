@@ -2,7 +2,7 @@ package utils
 
 import (
 	"github.com/go-playground/validator/v10"
-	"mindx/pkg/errs"
+	"sleep-tracker/pkg/errs"
 )
 
 // GetInvalidArgs -extract invalid arguments from error (normally in request's error)

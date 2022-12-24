@@ -3,7 +3,7 @@ package external
 import (
 	"context"
 	"github.com/spf13/viper"
-	"mindx/pkg/zapx"
+	"sleep-tracker/pkg/zapx"
 )
 
 type Configs struct {

@@ -2,12 +2,14 @@ package handler
 
 import (
 	"github.com/gin-gonic/gin"
-	"mindx/internal/consts"
-	"mindx/internal/models"
-	"mindx/pkg/errs"
-	"mindx/pkg/httpx"
-	"mindx/pkg/zapx"
 	"net/http"
+	"sleep-tracker/internal/consts"
+	"sleep-tracker/internal/models"
+	"sleep-tracker/internal/utils"
+	"sleep-tracker/pkg/errs"
+	"sleep-tracker/pkg/httpx"
+	"sleep-tracker/pkg/zapx"
+	"time"
 )
 
 type UserHandler struct {
@@ -88,12 +90,23 @@ func (h *UserHandler) Signin(c *gin.Context) {
 	})
 }
 
-func (h *UserHandler) MakeSleep(c *gin.Context) {
+func (h *UserHandler) CreateSleep(c *gin.Context) {
 	var err error
 
-	sleep := new(models.Sleep)
-	if ok := bindData(c, sleep); !ok {
+	sleepRequest := new(models.SleepRequest)
+	if ok := bindData(c, sleepRequest); !ok {
 		zapx.Error(c, consts.InvalidRequestBody, nil)
+		return
+	}
+
+	sleep, err := utils.GetSleepFromRequest(sleepRequest)
+	if err != nil {
+		zapx.Error(c, consts.InvalidRequestBody, nil)
+		err = errs.NewBadRequest("invalid request body")
+		c.JSON(errs.Status(err), httpx.ApiJson{
+			Error:   []error{err},
+			Message: "invalid request body.",
+		})
 		return
 	}
 
@@ -106,9 +119,12 @@ func (h *UserHandler) MakeSleep(c *gin.Context) {
 		return
 	}
 
+	sleepRequest.ID = sleep.ID
+	sleepRequest.SleepDuration = int64(sleep.SleepDuration / time.Millisecond)
+
 	c.JSON(http.StatusCreated, httpx.ApiJson{
 		Message: "successful to create new sleep entry.",
-		Data:    []interface{}{sleep},
+		Data:    []interface{}{sleepRequest},
 	})
 }
 
@@ -136,9 +152,20 @@ func (h *UserHandler) DeleteSleep(c *gin.Context) {
 
 func (h *UserHandler) UpdateSleep(c *gin.Context) {
 	var err error
-	sleep := new(models.Sleep)
-	if ok := bindData(c, sleep); !ok {
+	sleepRequest := new(models.SleepRequest)
+	if ok := bindData(c, sleepRequest); !ok {
 		zapx.Error(c, consts.InvalidRequestBody, nil)
+		return
+	}
+
+	sleep, err := utils.GetSleepFromRequest(sleepRequest)
+	if err != nil {
+		zapx.Error(c, consts.InvalidRequestBody, nil)
+		err = errs.NewBadRequest("invalid request body")
+		c.JSON(errs.Status(err), httpx.ApiJson{
+			Error:   []error{err},
+			Message: "invalid request body.",
+		})
 		return
 	}
 

@@ -6,7 +6,7 @@ import (
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"log"
-	"mindx/pkg/zapx"
+	"sleep-tracker/pkg/zapx"
 	"time"
 )
 
